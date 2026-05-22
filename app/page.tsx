@@ -115,6 +115,22 @@ export default function Home() {
       {/* Divider */}
       <div className="w-px h-16 bg-[rgba(250,248,245,0.08)] mx-auto" />
 
+      {/* Circular economy */}
+      <section className="relative z-10 py-20 md:py-32 px-6 max-w-2xl mx-auto w-full text-center">
+        <p className="text-[#C1714A] text-xs font-semibold tracking-[0.2em] uppercase mb-8">How it flows</p>
+        <p className="font-serif italic text-[clamp(22px,4vw,32px)] text-[rgba(250,248,245,0.85)] leading-relaxed mb-10">
+          Every host earns.<br />Every guest gives back.
+        </p>
+        <p className="text-[rgba(250,248,245,0.35)] text-base md:text-lg leading-relaxed">
+          When you show up as a guest, your contribution goes to the person who opened the door.<br /><br />
+          When you open the door, the next guest pays it forward.<br /><br />
+          <span className="text-[rgba(250,248,245,0.6)]">Presence, exchanged. Value, circulated. Not extracted.</span>
+        </p>
+      </section>
+
+      {/* Divider */}
+      <div className="w-px h-16 bg-[rgba(250,248,245,0.08)] mx-auto" />
+
       {/* Venues */}
       <section className="relative z-10 py-20 md:py-32 px-6 max-w-4xl mx-auto w-full">
         <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
@@ -124,9 +140,11 @@ export default function Home() {
               Your space.<br />Their moment.
             </h2>
             <p className="text-[rgba(250,248,245,0.4)] text-base leading-relaxed max-w-sm">
-              List your café, gym, or studio. Create offers for hosts.
-              They bring guests, you build a community of regulars.
-              Free to start.
+              You've tried the ads. The Instagram posts. The discount codes.<br />
+              Your best customers still walk in by accident.<br /><br />
+              Friendly makes that happen on purpose.<br />
+              List your space. Create offers for hosts. They bring guests —<br />
+              you build a community of regulars.
             </p>
           </div>
           <div className="shrink-0">
