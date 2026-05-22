@@ -1,324 +1,152 @@
 export default function Home() {
   return (
     <main className="flex flex-col min-h-screen overflow-x-hidden">
-      {/* Decorative blobs */}
-      <div
-        className="pointer-events-none fixed top-0 right-0 w-[70vw] h-[70vw] rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(193,113,74,0.12) 0%, transparent 70%)",
-          transform: "translate(30%, -30%)",
-        }}
-      />
-      <div
-        className="pointer-events-none fixed bottom-0 left-0 w-[60vw] h-[60vw] rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(193,113,74,0.10) 0%, transparent 70%)",
-          transform: "translate(-30%, 30%)",
-        }}
-      />
 
       {/* Nav */}
-      <nav className="relative z-10 flex items-center justify-between px-5 py-5 md:px-8 md:py-6 max-w-5xl mx-auto w-full">
+      <nav className="relative z-10 flex items-center justify-between px-6 py-5 max-w-4xl mx-auto w-full">
         <span className="font-serif italic text-2xl text-[#FAF8F5] tracking-tight">friendly</span>
         <a
           href="#download"
-          className="text-sm font-semibold text-[#FAF8F5] bg-[#C1714A] px-4 py-2 md:px-5 md:py-2.5 rounded-full hover:opacity-90 transition-opacity"
+          className="text-sm font-semibold text-[#FAF8F5] border border-[rgba(250,248,245,0.2)] px-4 py-2 rounded-full hover:border-[rgba(250,248,245,0.5)] transition-colors"
         >
           Download
         </a>
       </nav>
 
       {/* Hero */}
-      <section className="relative z-10 w-full max-w-5xl mx-auto px-5 md:px-6 pt-10 md:pt-16 pb-16 md:pb-24 flex flex-col md:flex-row md:items-center gap-10 md:gap-8">
-        {/* Left: text + buttons */}
-        <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
-          <div className="inline-block bg-[rgba(193,113,74,0.15)] border border-[rgba(193,113,74,0.3)] rounded-full px-4 py-1.5 text-[#C1714A] text-sm font-semibold mb-6 tracking-wide">
-            Now in Dubai
-          </div>
+      <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 pt-16 pb-24 md:pt-24 md:pb-36">
+        {/* Glow */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse 60% 40% at 50% 60%, rgba(193,113,74,0.12) 0%, transparent 70%)",
+          }}
+        />
 
-          <h1 className="font-serif italic text-[clamp(64px,12vw,88px)] leading-none text-[#FAF8F5] tracking-tight mb-5">
-            friendly
-          </h1>
+        <p className="text-[#C1714A] text-xs font-semibold tracking-[0.2em] uppercase mb-8">
+          Dubai · 2026
+        </p>
 
-          <p className="text-xl md:text-[clamp(18px,2.5vw,22px)] text-[rgba(250,248,245,0.65)] leading-relaxed mb-3">
-            Same place, same moment.<br />A real one.
-          </p>
+        <h1 className="font-serif italic text-[clamp(72px,16vw,140px)] leading-none text-[#FAF8F5] tracking-tight mb-8">
+          friendly
+        </h1>
 
-          <p className="text-base text-[rgba(250,248,245,0.45)] max-w-sm leading-relaxed mb-8">
-            Open a coffee, a run, a walk. Someone nearby joins. No messaging, no profiles — just show up.
-          </p>
+        <p className="text-[clamp(16px,2.5vw,20px)] text-[rgba(250,248,245,0.5)] max-w-sm leading-relaxed mb-12">
+          Show up. Be present.<br />That's where the meaning is.
+        </p>
 
-          <div id="download" className="flex flex-row gap-3 w-full max-w-xs md:max-w-none">
-            <a
-              href="#"
-              className="flex-1 md:flex-none flex items-center gap-2 justify-center bg-[#FAF8F5] text-[#1A1210] px-5 py-3 rounded-full font-semibold text-sm hover:bg-white transition-colors"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-              </svg>
-              App Store
-            </a>
-            <a
-              href="#"
-              className="flex-1 md:flex-none flex items-center gap-2 justify-center border border-[rgba(250,248,245,0.2)] text-[#FAF8F5] px-5 py-3 rounded-full font-semibold text-sm hover:border-[rgba(250,248,245,0.4)] transition-colors"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3.18 23.76c.3.17.64.22.99.14l12.24-7.07-2.76-2.76-10.47 9.69zM20.68 10.3L17.6 8.54l-3.06 3.06 3.06 3.06 3.1-1.78c.88-.51.88-1.56-.02-2.08zM3.18.24L13.66 9.93l-2.76 2.76L1.18.7C.85.52.5.52.18.7L3.18.24z"/>
-              </svg>
-              Google Play
-            </a>
-          </div>
-
-          <p className="text-xs text-[rgba(250,248,245,0.3)] mt-3">Coming soon to App Store & Google Play</p>
+        <div id="download" className="flex flex-row gap-3">
+          <a
+            href="#"
+            className="flex items-center gap-2 bg-[#FAF8F5] text-[#1A1210] px-5 py-3 rounded-full font-semibold text-sm hover:bg-white transition-colors"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            App Store
+          </a>
+          <a
+            href="#"
+            className="flex items-center gap-2 border border-[rgba(250,248,245,0.15)] text-[#FAF8F5] px-5 py-3 rounded-full font-semibold text-sm hover:border-[rgba(250,248,245,0.35)] transition-colors"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3.18 23.76c.3.17.64.22.99.14l12.24-7.07-2.76-2.76-10.47 9.69zM20.68 10.3L17.6 8.54l-3.06 3.06 3.06 3.06 3.1-1.78c.88-.51.88-1.56-.02-2.08zM3.18.24L13.66 9.93l-2.76 2.76L1.18.7C.85.52.5.52.18.7L3.18.24z"/>
+            </svg>
+            Google Play
+          </a>
         </div>
 
-        {/* Right: phone mockup — hidden on mobile */}
-        <div className="hidden md:flex justify-end shrink-0">
-          <div className="relative w-[260px] h-[520px] rounded-[44px] bg-[#FAF8F5] border-[6px] border-[rgba(250,248,245,0.15)] shadow-2xl overflow-hidden">
-            <div className="bg-[#1A1210] h-10 flex items-center justify-between px-6 pt-2">
-              <span className="text-[#FAF8F5] text-[10px] font-semibold">9:41</span>
-              <div className="flex gap-1 items-center">
-                <div className="w-3 h-1.5 rounded-sm bg-[#FAF8F5] opacity-60" />
-                <div className="w-3.5 h-1.5 rounded-sm bg-[#FAF8F5] opacity-60" />
-              </div>
-            </div>
-            <div className="bg-[#FAF8F5] h-full px-4 pt-3 pb-6 flex flex-col gap-3">
-              <div className="flex items-center justify-between mb-1">
-                <span className="font-serif italic text-[#1A1210] text-lg">friendly</span>
-                <div className="w-7 h-7 rounded-full bg-[#C1714A] flex items-center justify-center">
-                  <span className="text-white text-[10px] font-bold">⊕</span>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                {["Nearby", "Going", "Venues"].map((t, i) => (
-                  <div key={t} className={`px-3 py-1 rounded-full text-[10px] font-semibold ${i === 0 ? "bg-[#1A1210] text-[#FAF8F5]" : "bg-[#F0EAE4] text-[#8A7A72]"}`}>{t}</div>
-                ))}
-              </div>
-              {[
-                { emoji: "☕", activity: "Morning coffee", host: "Sara M.", time: "Now · 1 hr", cr: "15" },
-                { emoji: "🏃", activity: "JBR run", host: "Karim A.", time: "In 1 hr · 45 min", cr: "10" },
-                { emoji: "🥗", activity: "Lunch break", host: "Nour K.", time: "12:30 PM · 1 hr", cr: "20" },
-              ].map((exp) => (
-                <div key={exp.activity} className="bg-white rounded-2xl p-3 flex items-center gap-3 shadow-sm border border-[#F0EAE4]">
-                  <div className="w-10 h-10 rounded-full bg-[#F5F0EC] flex items-center justify-center text-lg shrink-0">{exp.emoji}</div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[#1A1210] font-semibold text-xs truncate">{exp.activity}</p>
-                    <p className="text-[#8A7A72] text-[10px]">{exp.host} · {exp.time}</p>
-                  </div>
-                  <div className="bg-[#FDF6F2] border border-[#E8C9B5] rounded-full px-2 py-0.5">
-                    <span className="text-[#C1714A] text-[10px] font-bold">{exp.cr} cr</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <p className="text-[rgba(250,248,245,0.2)] text-xs mt-4">Coming soon</p>
       </section>
 
-      {/* How it works */}
-      <section className="relative z-10 py-16 md:py-24 px-5 md:px-6 max-w-5xl mx-auto w-full">
-        <h2 className="font-serif text-[clamp(26px,5vw,42px)] text-center text-[#FAF8F5] mb-10 md:mb-16">
-          How it works
-        </h2>
+      {/* Divider */}
+      <div className="w-px h-16 bg-[rgba(250,248,245,0.08)] mx-auto" />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+      {/* Manifesto */}
+      <section className="relative z-10 py-20 md:py-32 px-6 max-w-2xl mx-auto w-full text-center">
+        <p className="font-serif italic text-[clamp(22px,4vw,32px)] text-[rgba(250,248,245,0.85)] leading-relaxed mb-10">
+          "300,000 followers.<br />No one to grab coffee with."
+        </p>
+        <p className="text-[rgba(250,248,245,0.4)] text-base leading-relaxed">
+          The WHO declared loneliness a global health threat in 2023.
+          Screens connect us to everyone and no one at the same time.
+          Friendly is the opposite of that — open an experience, someone
+          nearby joins, you show up. No profiles, no messaging, no feed.
+          Just a real moment with a real person.
+        </p>
+      </section>
+
+      {/* Divider */}
+      <div className="w-px h-16 bg-[rgba(250,248,245,0.08)] mx-auto" />
+
+      {/* Three ideas */}
+      <section className="relative z-10 py-20 md:py-32 px-6 max-w-4xl mx-auto w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 text-center">
           {[
             {
-              step: "01",
+              symbol: "☕",
               title: "Open an experience",
-              body: "Coffee, a run, lunch — pick an activity and set a time. It goes live on the map instantly.",
+              body: "Coffee, a run, lunch. Set a time. It goes live on the map.",
             },
             {
-              step: "02",
-              title: "Someone joins",
-              body: "A real person nearby sees it and joins. No chatting first. No swiping. Just a confirmed plan.",
+              symbol: "→",
+              title: "Someone nearby joins",
+              body: "No swiping. No chatting first. A real person, a confirmed plan.",
             },
             {
-              step: "03",
+              symbol: "◎",
               title: "Show up",
-              body: "Check in with a QR code. Be present. That's it — no rating, no review, no follow.",
+              body: "Check in. Put your phone down. Be here.",
             },
           ].map((item) => (
-            <div
-              key={item.step}
-              className="bg-[rgba(250,248,245,0.04)] border border-[rgba(250,248,245,0.08)] rounded-2xl md:rounded-3xl p-6 md:p-8"
-            >
-              <span className="text-[#C1714A] font-semibold text-sm tracking-widest">{item.step}</span>
-              <h3 className="font-serif text-xl md:text-2xl text-[#FAF8F5] mt-3 mb-2">{item.title}</h3>
-              <p className="text-[rgba(250,248,245,0.55)] leading-relaxed text-sm md:text-base">{item.body}</p>
+            <div key={item.title} className="flex flex-col items-center gap-4">
+              <span className="text-[#C1714A] text-2xl">{item.symbol}</span>
+              <h3 className="font-serif text-xl text-[#FAF8F5]">{item.title}</h3>
+              <p className="text-[rgba(250,248,245,0.4)] text-sm leading-relaxed max-w-[200px]">{item.body}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Screenshots — horizontal scroll on mobile */}
-      <section className="relative z-10 py-8 md:py-16 w-full">
-        <div className="flex gap-6 overflow-x-auto px-5 md:px-0 md:justify-center md:max-w-5xl md:mx-auto pb-4"
-          style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}>
+      {/* Divider */}
+      <div className="w-px h-16 bg-[rgba(250,248,245,0.08)] mx-auto" />
 
-          {[
-            {
-              label: "Open an experience",
-              content: (
-                <div className="flex-1 px-4 pt-2 pb-4 flex flex-col gap-2.5">
-                  <div className="w-7 h-7 rounded-full bg-[#F0EAE4] flex items-center justify-center">
-                    <span className="text-xs text-[#1A1210]">←</span>
-                  </div>
-                  <p className="font-serif text-[#1A1210] text-lg leading-tight">New experience</p>
-                  <div>
-                    <p className="text-[#1A1210] text-[9px] font-semibold uppercase tracking-wide mb-1.5">What?</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {["☕ Coffee", "🏃 Run", "🥗 Lunch"].map((a, i) => (
-                        <div key={a} className={`px-2.5 py-1 rounded-full text-[9px] font-semibold border ${i === 0 ? "bg-[#1A1210] text-[#FAF8F5] border-[#1A1210]" : "bg-white text-[#2C2420] border-[#E8E0D8]"}`}>{a}</div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="flex gap-1.5">
-                    {["1-on-1", "Small group"].map((f, i) => (
-                      <div key={f} className={`px-2.5 py-1 rounded-full text-[9px] font-semibold border ${i === 0 ? "bg-[#1A1210] text-[#FAF8F5] border-[#1A1210]" : "bg-white text-[#2C2420] border-[#E8E0D8]"}`}>{f}</div>
-                    ))}
-                  </div>
-                  <div className="flex gap-2">
-                    <div className="flex-1 bg-white border border-[#E8E0D8] rounded-xl p-2">
-                      <p className="text-[#8A7A72] text-[8px]">When?</p>
-                      <p className="text-[#1A1210] text-[9px] font-semibold">Now</p>
-                    </div>
-                    <div className="flex-1 bg-white border border-[#E8E0D8] rounded-xl p-2">
-                      <p className="text-[#8A7A72] text-[8px]">How long?</p>
-                      <p className="text-[#1A1210] text-[9px] font-semibold">1 hour</p>
-                    </div>
-                  </div>
-                  <div className="bg-white border border-[#E8E0D8] rounded-xl p-2">
-                    <p className="text-[#8A7A72] text-[8px]">Contribution</p>
-                    <p className="text-[#1A1210] text-[9px] font-semibold">15 credits</p>
-                  </div>
-                  <div className="mt-auto bg-[#C1714A] rounded-full py-2.5 flex items-center justify-center">
-                    <span className="text-white font-semibold text-[10px]">Preview →</span>
-                  </div>
-                </div>
-              ),
-            },
-            {
-              label: "Someone joins",
-              content: (
-                <div className="flex-1 px-4 pt-3 pb-4 flex flex-col items-center gap-2.5">
-                  <div className="w-14 h-14 rounded-full bg-[#F5F0EC] flex items-center justify-center text-3xl">☕</div>
-                  <div className="text-center">
-                    <p className="font-serif text-[#1A1210] text-base">Morning coffee</p>
-                    <p className="text-[#8A7A72] text-[9px]">Now · 1 hour · 15 cr</p>
-                  </div>
-                  <div className="w-full bg-[#E8F5EC] border border-[#A8D5B5] rounded-2xl px-3 py-2 flex items-center gap-2">
-                    <span className="text-base">🎉</span>
-                    <div>
-                      <p className="text-[#1A8A3C] text-[9px] font-semibold">Sara joined!</p>
-                      <p className="text-[#8A7A72] text-[8px]">Just now</p>
-                    </div>
-                  </div>
-                  <div className="w-full bg-white border border-[#E8E0D8] rounded-xl px-3 py-2 flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-[#F5F0EC] flex items-center justify-center text-sm">🏃‍♀️</div>
-                    <div>
-                      <p className="text-[#1A1210] text-[9px] font-semibold">Sara M.</p>
-                      <p className="text-[#8A7A72] text-[8px]">⭐ Regular</p>
-                    </div>
-                  </div>
-                  <div className="w-full bg-[#FDF6F2] border border-[rgba(193,113,74,0.3)] rounded-2xl px-3 py-2 text-center">
-                    <p className="text-[#C1714A] text-[9px] font-semibold">Share your QR to check in</p>
-                  </div>
-                  <div className="mt-auto w-full bg-[#1A1210] rounded-full py-2.5 flex items-center justify-center">
-                    <span className="text-[#FAF8F5] font-semibold text-[10px]">End experience</span>
-                  </div>
-                </div>
-              ),
-            },
-            {
-              label: "Show up",
-              content: (
-                <div className="flex-1 px-4 pt-3 pb-4 flex flex-col items-center gap-2.5">
-                  <p className="font-serif text-[#1A1210] text-base">Check in</p>
-                  <p className="text-[#8A7A72] text-[9px]">Scan the host's QR code</p>
-                  <div className="w-24 h-24 bg-white border-2 border-[#E8E0D8] rounded-2xl flex items-center justify-center">
-                    <div className="grid grid-cols-5 gap-0.5">
-                      {Array.from({length: 25}).map((_, i) => (
-                        <div key={i} className={`w-2 h-2 rounded-sm ${[0,1,2,5,10,12,14,19,22,23,24,6,18,7,17].includes(i) ? "bg-[#1A1210]" : "bg-transparent"}`} />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="w-full bg-[#E8F5EC] border border-[#A8D5B5] rounded-2xl px-3 py-2.5 text-center">
-                    <span className="text-xl">✓</span>
-                    <p className="text-[#1A8A3C] text-[10px] font-semibold">Checked in!</p>
-                    <p className="text-[#8A7A72] text-[8px]">Morning coffee · Sara M.</p>
-                  </div>
-                  <div className="w-full bg-white border border-[#E8E0D8] rounded-2xl px-3 py-2">
-                    <p className="text-[#8A7A72] text-[8px] mb-1">Time elapsed</p>
-                    <p className="font-serif text-[#1A1210] text-xl">00:23:14</p>
-                  </div>
-                  <div className="mt-auto w-full bg-[#C1714A] rounded-full py-2.5 flex items-center justify-center">
-                    <span className="text-white font-semibold text-[10px]">End (36:45)</span>
-                  </div>
-                </div>
-              ),
-            },
-          ].map((screen) => (
-            <div key={screen.label} className="flex flex-col items-center gap-3 shrink-0" style={{ scrollSnapAlign: "center" }}>
-              <p className="text-[rgba(250,248,245,0.4)] text-xs font-semibold tracking-widest uppercase">{screen.label}</p>
-              <div className="w-[200px] h-[420px] rounded-[36px] bg-[#FAF8F5] border-[5px] border-[rgba(250,248,245,0.12)] shadow-2xl overflow-hidden flex flex-col">
-                <div className="bg-[#FAF8F5] h-7 flex items-center justify-between px-4 pt-1">
-                  <span className="text-[#1A1210] text-[9px] font-semibold">9:41</span>
-                  <div className="w-8 h-1 rounded-full bg-[rgba(26,18,16,0.2)]" />
-                </div>
-                {screen.content}
-              </div>
-            </div>
-          ))}
-        </div>
-        <p className="text-center text-[rgba(250,248,245,0.2)] text-xs mt-3 md:hidden">← swipe →</p>
-      </section>
-
-      {/* Why */}
-      <section className="relative z-10 py-16 md:py-24 px-5 md:px-6 max-w-3xl mx-auto w-full text-center">
-        <p className="text-[rgba(250,248,245,0.4)] text-xs font-semibold tracking-widest uppercase mb-5">
-          Why friendly
-        </p>
-        <blockquote className="font-serif italic text-[clamp(20px,5vw,36px)] text-[#FAF8F5] leading-snug mb-6">
-          "300,000 followers.<br />No one to grab coffee with."
-        </blockquote>
-        <p className="text-[rgba(250,248,245,0.55)] text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-          The WHO declared loneliness a global health threat in 2023. Digital connection hasn't solved physical isolation — it's made it worse. Friendly brings back the slow dance: real people, real place, real moment.
-        </p>
-      </section>
-
-      {/* Venue section */}
-      <section className="relative z-10 py-8 md:py-24 px-5 md:px-6 max-w-5xl mx-auto w-full">
-        <div className="bg-[rgba(193,113,74,0.08)] border border-[rgba(193,113,74,0.2)] rounded-2xl md:rounded-3xl p-7 md:p-14 flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
+      {/* Venues */}
+      <section className="relative z-10 py-20 md:py-32 px-6 max-w-4xl mx-auto w-full">
+        <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
           <div className="flex-1">
-            <span className="text-[#C1714A] text-xs font-semibold tracking-widest uppercase">For venues</span>
-            <h2 className="font-serif text-[clamp(22px,4vw,38px)] text-[#FAF8F5] mt-3 mb-3">
-              Turn foot traffic<br />into regulars
+            <p className="text-[#C1714A] text-xs font-semibold tracking-[0.2em] uppercase mb-4">For venues</p>
+            <h2 className="font-serif text-[clamp(28px,5vw,48px)] text-[#FAF8F5] leading-tight mb-5">
+              Your space.<br />Their moment.
             </h2>
-            <p className="text-[rgba(250,248,245,0.55)] leading-relaxed text-sm md:text-base max-w-md">
-              List your café, gym, or studio on Friendly. Create offers for hosts — they bring guests, you build community. Free to start.
+            <p className="text-[rgba(250,248,245,0.4)] text-base leading-relaxed max-w-sm">
+              List your café, gym, or studio. Create offers for hosts.
+              They bring guests, you build a community of regulars.
+              Free to start.
             </p>
           </div>
-          <a
-            href="mailto:hello@itsjustafriendly.com?subject=Venue partnership"
-            className="shrink-0 bg-[#C1714A] text-[#FAF8F5] px-7 py-4 rounded-full font-semibold hover:opacity-90 transition-opacity text-center text-sm md:text-base"
-          >
-            Partner with us →
-          </a>
+          <div className="shrink-0">
+            <a
+              href="mailto:hello@itsjustafriendly.com?subject=Venue partnership"
+              className="inline-block bg-[#C1714A] text-[#FAF8F5] px-8 py-4 rounded-full font-semibold hover:opacity-90 transition-opacity text-sm"
+            >
+              Partner with us →
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-[rgba(250,248,245,0.08)] py-8 px-5 mt-auto">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span className="font-serif italic text-xl text-[rgba(250,248,245,0.5)]">friendly</span>
-          <div className="flex gap-4 text-sm text-[rgba(250,248,245,0.35)]">
-            <a href="mailto:hello@itsjustafriendly.com" className="hover:text-[#FAF8F5] transition-colors">hello@itsjustafriendly.com</a>
-            <span>Dubai, UAE</span>
-          </div>
-          <span className="text-xs text-[rgba(250,248,245,0.2)]">© 2026 Friendly</span>
+      <footer className="relative z-10 border-t border-[rgba(250,248,245,0.06)] py-8 px-6 mt-auto">
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[rgba(250,248,245,0.25)] text-sm">
+          <span className="font-serif italic text-lg">friendly</span>
+          <a href="mailto:hello@itsjustafriendly.com" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">
+            hello@itsjustafriendly.com
+          </a>
+          <span className="text-xs">© 2026 Friendly · Dubai</span>
         </div>
       </footer>
+
     </main>
   );
 }
