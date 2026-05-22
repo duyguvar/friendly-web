@@ -67,10 +67,16 @@ export default function Home() {
         <p className="font-serif italic text-[clamp(22px,4vw,32px)] text-[rgba(250,248,245,0.85)] leading-relaxed mb-10">
           "300,000 followers.<br />No one to grab coffee with."
         </p>
-        <p className="font-serif italic text-[clamp(18px,3vw,24px)] text-[rgba(250,248,245,0.6)] leading-relaxed">
+        <p className="text-[rgba(250,248,245,0.35)] text-base md:text-lg leading-relaxed mb-10">
+          We built tools to connect everyone.<br />
+          They left us more alone than before.<br />
+          Exhausted by swipes. Performed for feeds.<br />
+          Surrounded by noise, starved of presence.
+        </p>
+        <p className="font-serif italic text-[clamp(18px,3vw,24px)] text-[rgba(250,248,245,0.7)] leading-relaxed">
           You're not lonely because you're alone.<br />
           You're lonely because nothing feels real.<br />
-          <span className="text-[#FAF8F5]">This does.</span>
+          <span className="text-[#FAF8F5] not-italic">This does.</span>
         </p>
       </section>
 
@@ -83,7 +89,7 @@ export default function Home() {
           {[
             {
               symbol: "☕",
-              title: "Open an experience",
+              title: "Start an experience",
               body: "Coffee, a run, lunch. Set a time. It goes live on the map.",
             },
             {
