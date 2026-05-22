@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "friendly",
     description: "Real experiences with real people. Coffee, runs, walks — no messaging, no profiles. Just show up.",
-    url: "https://friendly.ae",
+    url: "https://itsjustafriendly.com",
     siteName: "friendly",
     locale: "en_US",
     type: "website",

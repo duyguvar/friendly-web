@@ -317,7 +317,7 @@ export default function Home() {
             </p>
           </div>
           <a
-            href="mailto:hello@friendly.ae?subject=Venue partnership"
+            href="mailto:hello@itsjustafriendly.com?subject=Venue partnership"
             className="shrink-0 bg-[#C1714A] text-[#FAF8F5] px-8 py-4 rounded-full font-semibold hover:opacity-90 transition-opacity text-center"
           >
             Partner with us →
@@ -330,7 +330,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <span className="font-serif italic text-xl text-[rgba(250,248,245,0.5)]">friendly</span>
           <div className="flex gap-6 text-sm text-[rgba(250,248,245,0.35)]">
-            <a href="mailto:hello@friendly.ae" className="hover:text-[#FAF8F5] transition-colors">hello@friendly.ae</a>
+            <a href="mailto:hello@itsjustafriendly.com" className="hover:text-[#FAF8F5] transition-colors">hello@itsjustafriendly.com</a>
             <span>Dubai, UAE</span>
           </div>
           <span className="text-xs text-[rgba(250,248,245,0.2)]">© 2026 Friendly</span>
