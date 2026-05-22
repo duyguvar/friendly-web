@@ -67,12 +67,10 @@ export default function Home() {
         <p className="font-serif italic text-[clamp(22px,4vw,32px)] text-[rgba(250,248,245,0.85)] leading-relaxed mb-10">
           "300,000 followers.<br />No one to grab coffee with."
         </p>
-        <p className="text-[rgba(250,248,245,0.4)] text-base leading-relaxed">
-          The WHO declared loneliness a global health threat in 2023.
-          Screens connect us to everyone and no one at the same time.
-          Friendly is the opposite of that — open an experience, someone
-          nearby joins, you show up. No profiles, no messaging, no feed.
-          Just a real moment with a real person.
+        <p className="font-serif italic text-[clamp(18px,3vw,24px)] text-[rgba(250,248,245,0.6)] leading-relaxed">
+          You're not lonely because you're alone.<br />
+          You're lonely because nothing feels real.<br />
+          <span className="text-[#FAF8F5]">This does.</span>
         </p>
       </section>
 
