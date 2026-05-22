@@ -5,12 +5,20 @@ export default function Home() {
       {/* Nav */}
       <nav className="relative z-10 flex items-center justify-between px-6 py-5 max-w-4xl mx-auto w-full">
         <span className="font-serif italic text-2xl text-[#FAF8F5] tracking-tight">friendly</span>
-        <a
-          href="#download"
-          className="text-sm font-semibold text-[#FAF8F5] border border-[rgba(250,248,245,0.2)] px-4 py-2 rounded-full hover:border-[rgba(250,248,245,0.5)] transition-colors"
-        >
-          Download
-        </a>
+        <div className="flex items-center gap-4">
+          <a
+            href="/membership"
+            className="text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors"
+          >
+            Pricing
+          </a>
+          <a
+            href="#download"
+            className="text-sm font-semibold text-[#FAF8F5] border border-[rgba(250,248,245,0.2)] px-4 py-2 rounded-full hover:border-[rgba(250,248,245,0.5)] transition-colors"
+          >
+            Download
+          </a>
+        </div>
       </nav>
 
       {/* Hero */}
@@ -162,9 +170,10 @@ export default function Home() {
       <footer className="relative z-10 border-t border-[rgba(250,248,245,0.06)] py-8 px-6 mt-auto">
         <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[rgba(250,248,245,0.25)] text-sm">
           <span className="font-serif italic text-lg">friendly</span>
-          <a href="mailto:hello@itsjustafriendly.com" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">
-            hello@itsjustafriendly.com
-          </a>
+          <div className="flex items-center gap-5">
+            <a href="/membership" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">Pricing</a>
+            <a href="mailto:hello@itsjustafriendly.com" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">hello@itsjustafriendly.com</a>
+          </div>
           <span className="text-xs">© 2026 Friendly · Dubai</span>
         </div>
       </footer>
