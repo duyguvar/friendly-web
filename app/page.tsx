@@ -13,6 +13,12 @@ export default function Home() {
             Pricing
           </a>
           <a
+            href="/credits"
+            className="text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors"
+          >
+            Get credits
+          </a>
+          <a
             href="#download"
             className="text-sm font-semibold text-[#FAF8F5] border border-[rgba(250,248,245,0.2)] px-4 py-2 rounded-full hover:border-[rgba(250,248,245,0.5)] transition-colors"
           >
@@ -172,6 +178,7 @@ export default function Home() {
           <span className="font-serif italic text-lg">friendly</span>
           <div className="flex items-center gap-5">
             <a href="/membership" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">Pricing</a>
+            <a href="/credits" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">Get credits</a>
             <a href="mailto:hello@itsjustafriendly.com" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">hello@itsjustafriendly.com</a>
           </div>
           <span className="text-xs">© 2026 Friendly · Dubai</span>
