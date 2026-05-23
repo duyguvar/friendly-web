@@ -22,8 +22,23 @@ export default function VenueMembershipUpgradePage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resent, setResent] = useState(false);
+  const [autoToken, setAutoToken] = useState<string | null>(null);
 
-  const fetchVenues = useCallback(async (userId: string) => {
+  const resolveVenues = useCallback((venueList: Venue[], targetVenueId?: string | null) => {
+    setVenues(venueList);
+    if (targetVenueId) {
+      const match = venueList.find(v => v.id === targetVenueId);
+      if (match) { setSelectedVenue(match); setStep("plans"); return; }
+    }
+    if (venueList.length === 1) {
+      setSelectedVenue(venueList[0]);
+      setStep("plans");
+    } else {
+      setStep("venues");
+    }
+  }, []);
+
+  const fetchVenues = useCallback(async (userId: string, targetVenueId?: string | null) => {
     const { data } = await supabase
       .from("venues")
       .select("id, name, venue_membership")
@@ -31,28 +46,37 @@ export default function VenueMembershipUpgradePage() {
       .order("name");
 
     if (data && data.length > 0) {
-      const venueList = data as Venue[];
-      setVenues(venueList);
-      if (venueList.length === 1) {
-        setSelectedVenue(venueList[0]);
-        setStep("plans");
-      } else {
-        setStep("venues");
-      }
+      resolveVenues(data as Venue[], targetVenueId);
     } else {
       setError("No venues found for this account.");
       setStep("plans");
     }
-  }, []);
+  }, [resolveVenues]);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session?.user) {
-        fetchVenues(data.session.user.id);
-      } else {
-        setStep("phone");
-      }
-    });
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+    const venueId = params.get("venue_id");
+
+    if (token) {
+      setAutoToken(token);
+      // Verify token and fetch venues directly — skip OTP
+      supabase.auth.getUser(token).then(({ data }) => {
+        if (data.user) {
+          fetchVenues(data.user.id, venueId);
+        } else {
+          setStep("phone");
+        }
+      });
+    } else {
+      supabase.auth.getSession().then(({ data }) => {
+        if (data.session?.user) {
+          fetchVenues(data.session.user.id);
+        } else {
+          setStep("phone");
+        }
+      });
+    }
   }, [fetchVenues]);
 
   async function sendOtp() {
@@ -89,14 +113,20 @@ export default function VenueMembershipUpgradePage() {
   async function handleSubscribe() {
     if (!selectedPlan || !selectedVenue) return;
     setStep("subscribing");
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) { setError("Session expired. Please refresh."); setStep("plans"); return; }
+
+    // Use app-passed token if available, otherwise fall back to session
+    let token = autoToken;
+    if (!token) {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) { setError("Session expired. Please refresh."); setStep("plans"); return; }
+      token = session.access_token;
+    }
 
     const res = await fetch("/api/create-venue-membership-checkout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${session.access_token}`,
+        "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify({ plan: selectedPlan, venue_id: selectedVenue.id }),
     });
