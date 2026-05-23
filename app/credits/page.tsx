@@ -88,12 +88,14 @@ export default function CreditsPage() {
 
     const res = await fetch("/api/create-checkout", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${session.access_token}`,
+      },
+      // price omitted — server looks it up from canonical pricing table
       body: JSON.stringify({
         credits: pkg.credits,
-        price: pkg.price,
         currency: pkg.currency,
-        userId: session.user.id,
       }),
     });
 

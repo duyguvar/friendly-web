@@ -40,6 +40,18 @@ export function getCreditPackages(countryCode?: string): CreditPackage[] {
   return PRICING[countryCode.toUpperCase()] ?? DEFAULT;
 }
 
+// Server-side: look up canonical price for a given credits+currency pair.
+// Returns null if the combination is not in our pricing table (reject the request).
+export function getCanonicalPackage(credits: number, currency: string): CreditPackage | null {
+  const allPackages = [
+    ...Object.values(PRICING).flat(),
+    ...DEFAULT,
+  ];
+  return allPackages.find(
+    p => p.credits === credits && p.currency.toUpperCase() === currency.toUpperCase()
+  ) ?? null;
+}
+
 export function formatPrice(pkg: CreditPackage): string {
   if (pkg.symbolAfter) return `${pkg.price} ${pkg.symbol.trim()}`;
   return `${pkg.symbol}${pkg.price}`;
