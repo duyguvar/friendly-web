@@ -286,15 +286,12 @@ export default function MembershipPage() {
           </div>
 
           <div className="mt-8 text-center">
-            <div className="inline-flex flex-col items-center gap-3 bg-[rgba(250,248,245,0.03)] border border-[rgba(250,248,245,0.07)] rounded-2xl px-8 py-5">
-              <p className="text-[rgba(250,248,245,0.5)] text-sm">Venue subscriptions launching soon</p>
-              <a
-                href="mailto:hello@itsjustafriendly.com?subject=Venue partnership enquiry"
-                className="bg-[#C1714A] text-[#FAF8F5] px-6 py-3 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
-              >
-                Partner with us →
-              </a>
-            </div>
+            <a
+              href="/membership/venue-upgrade"
+              className="inline-block bg-[#C1714A] text-[#FAF8F5] px-8 py-4 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
+            >
+              Upgrade your venue →
+            </a>
           </div>
         </section>
 

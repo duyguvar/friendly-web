@@ -90,6 +90,48 @@ export const MEMBERSHIP_PLANS: MembershipPlan[] = [
 
 export const TIER_ORDER: MembershipTier[] = ["free", "silver", "gold", "platinum"];
 
+export type VenueMembershipTier = "starter" | "essential" | "partner" | "enterprise";
+
+export type VenueMembershipPlan = {
+  id: VenueMembershipTier;
+  name: string;
+  amount: number;
+  displayPrice: string;
+  features: string[];
+  popular?: boolean;
+};
+
+export const VENUE_MEMBERSHIP_PLANS: VenueMembershipPlan[] = [
+  {
+    id: "essential",
+    name: "Essential",
+    amount: 9900,
+    displayPrice: "AED 99",
+    features: ["5 active offers", "5 venues", "Basic analytics", "Push notification on experience start"],
+  },
+  {
+    id: "partner",
+    name: "Partner",
+    amount: 24900,
+    displayPrice: "AED 249",
+    features: ["10 active offers", "10 venues", "Priority listing in feed", "Detailed analytics", "Weekly automated reports", "Venue branding on experience cards"],
+    popular: true,
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise",
+    amount: 59900,
+    displayPrice: "AED 599",
+    features: ["Unlimited offers", "Unlimited venues", "Featured tab placement", "Full analytics & cohort data", "Dedicated support", "Custom branding"],
+  },
+];
+
+export const VENUE_TIER_ORDER: VenueMembershipTier[] = ["starter", "essential", "partner", "enterprise"];
+
+export function getCanonicalVenueMembershipPlan(planId: string): VenueMembershipPlan | null {
+  return VENUE_MEMBERSHIP_PLANS.find(p => p.id === planId) ?? null;
+}
+
 export function getCanonicalMembershipPlan(planId: string): MembershipPlan | null {
   return MEMBERSHIP_PLANS.find(p => p.id === planId) ?? null;
 }
