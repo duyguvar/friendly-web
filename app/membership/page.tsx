@@ -146,8 +146,8 @@ export default function MembershipPage() {
       <nav className="flex items-center justify-between px-6 py-5 max-w-5xl mx-auto w-full">
         <a href="/" className="font-serif italic text-xl text-[#FAF8F5]">friendly</a>
         <div className="flex items-center gap-4">
-          <a href="/about" className="text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors">About</a>
-          <a href="/credits" className="text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors">Get credits</a>
+          <a href="/about" className="hidden sm:block text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors">About</a>
+          <a href="/credits" className="hidden sm:block text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors">Get credits</a>
           <a href="/#download" className="text-sm font-semibold text-[#FAF8F5] border border-[rgba(250,248,245,0.2)] px-4 py-2 rounded-full hover:border-[rgba(250,248,245,0.5)] transition-colors">Download</a>
         </div>
       </nav>
