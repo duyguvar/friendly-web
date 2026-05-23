@@ -224,24 +224,62 @@ export default function VenueMembershipUpgradePage() {
                 <p className="text-[rgba(250,248,245,0.4)] text-sm">Which venue would you like to upgrade?</p>
               </div>
               <div className="flex flex-col gap-3">
-                {venues.map(venue => (
-                  <button
-                    key={venue.id}
-                    onClick={() => { setSelectedVenue(venue); setStep("plans"); }}
-                    className="w-full text-left rounded-2xl border border-[rgba(250,248,245,0.08)] bg-[rgba(250,248,245,0.03)] hover:border-[rgba(250,248,245,0.15)] px-5 py-4 transition-all"
-                  >
-                    <p className="font-semibold text-[#FAF8F5]">{venue.name}</p>
-                    <p className="text-xs text-[rgba(250,248,245,0.4)] mt-1 capitalize">
-                      Current: {venue.venue_membership || "starter"}
-                    </p>
-                  </button>
-                ))}
+                {venues.map(venue => {
+                  const isEnterprise = (venue.venue_membership || "starter") === "enterprise";
+                  return (
+                    <button
+                      key={venue.id}
+                      onClick={() => { setSelectedVenue(venue); setStep("plans"); }}
+                      className="w-full text-left rounded-2xl border border-[rgba(250,248,245,0.08)] bg-[rgba(250,248,245,0.03)] hover:border-[rgba(250,248,245,0.15)] px-5 py-4 transition-all"
+                    >
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold text-[#FAF8F5]">{venue.name}</p>
+                        {isEnterprise && (
+                          <span className="text-[10px] font-semibold bg-[rgba(250,248,245,0.1)] text-[rgba(250,248,245,0.5)] px-2 py-0.5 rounded-full">
+                            Highest plan
+                          </span>
+                        )}
+                      </div>
+                      <p className={`text-xs mt-1 capitalize ${isEnterprise ? "text-[rgba(250,248,245,0.25)]" : "text-[rgba(250,248,245,0.4)]"}`}>
+                        Current: {venue.venue_membership || "starter"}
+                      </p>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           )}
 
           {/* PLANS */}
-          {step === "plans" && selectedVenue && (
+          {step === "plans" && selectedVenue && (selectedVenue.venue_membership || "starter") === "enterprise" && (
+            <div className="flex flex-col gap-6 text-center">
+              <div className="w-16 h-16 rounded-full bg-[rgba(193,113,74,0.15)] flex items-center justify-center mx-auto">
+                <span className="text-[#C1714A] text-2xl">✦</span>
+              </div>
+              <div>
+                <h1 className="font-serif text-3xl text-[#FAF8F5] mb-3">{selectedVenue.name}</h1>
+                <p className="text-[rgba(250,248,245,0.4)] text-base leading-relaxed">
+                  This venue is already on Enterprise — our highest plan. No further upgrades available.
+                </p>
+              </div>
+              <a
+                href="mailto:hello@itsjustafriendly.com"
+                className="text-[#C1714A] text-sm hover:opacity-80 transition-opacity"
+              >
+                Questions? hello@itsjustafriendly.com
+              </a>
+              {venues.length > 1 && (
+                <button
+                  onClick={() => { setSelectedVenue(null); setSelectedPlan(null); setStep("venues"); }}
+                  className="text-[rgba(250,248,245,0.3)] text-xs hover:text-[rgba(250,248,245,0.6)] transition-colors"
+                >
+                  ← Choose a different venue
+                </button>
+              )}
+            </div>
+          )}
+
+          {step === "plans" && selectedVenue && (selectedVenue.venue_membership || "starter") !== "enterprise" && (
             <div className="flex flex-col gap-6">
               <div>
                 <h1 className="font-serif text-3xl text-[#FAF8F5] mb-1">Upgrade venue plan</h1>
