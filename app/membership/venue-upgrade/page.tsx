@@ -58,6 +58,9 @@ export default function VenueMembershipUpgradePage() {
     const token = params.get("token");
     const venueId = params.get("venue_id");
 
+    const plan = params.get("plan") as VenueMembershipTier | null;
+    if (plan) setSelectedPlan(plan);
+
     if (token) {
       setAutoToken(token);
       // Verify token and fetch venues directly — skip OTP
