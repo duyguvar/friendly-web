@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { createClient } from "../../lib/supabase";
+import { supabase } from "../../lib/supabase";
 import { getCreditPackages, formatPrice, type CreditPackage } from "../../lib/pricing";
 
 type Step = "loading" | "phone" | "otp" | "packages" | "purchasing";
@@ -16,7 +16,6 @@ export default function CreditsPage() {
   const [error, setError] = useState<string | null>(null);
   const [resent, setResent] = useState(false);
 
-  const supabase = createClient();
   const packages = getCreditPackages("AE");
 
   const fetchCredits = useCallback(async (userId: string) => {
@@ -26,7 +25,7 @@ export default function CreditsPage() {
       .eq("id", userId)
       .single();
     if (data) setCredits(data.credits as number);
-  }, [supabase]);
+  }, []);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -37,7 +36,7 @@ export default function CreditsPage() {
         setStep("phone");
       }
     });
-  }, [supabase, fetchCredits]);
+  }, [fetchCredits]);
 
   async function sendOtp() {
     if (!phone.trim()) return;
