@@ -15,6 +15,7 @@ export default function MembershipUpgradePage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resent, setResent] = useState(false);
+  const [autoToken, setAutoToken] = useState<string | null>(null);
 
   const fetchTier = useCallback(async (userId: string) => {
     const { data } = await supabase
@@ -26,14 +27,31 @@ export default function MembershipUpgradePage() {
   }, []);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session?.user) {
-        fetchTier(data.session.user.id);
-        setStep("plans");
-      } else {
-        setStep("phone");
-      }
-    });
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+    const plan = params.get("plan") as MembershipTier | null;
+    if (plan) setSelected(plan);
+
+    if (token) {
+      setAutoToken(token);
+      supabase.auth.getUser(token).then(({ data }) => {
+        if (data.user) {
+          fetchTier(data.user.id);
+          setStep("plans");
+        } else {
+          setStep("phone");
+        }
+      });
+    } else {
+      supabase.auth.getSession().then(({ data }) => {
+        if (data.session?.user) {
+          fetchTier(data.session.user.id);
+          setStep("plans");
+        } else {
+          setStep("phone");
+        }
+      });
+    }
   }, [fetchTier]);
 
   async function sendOtp() {
@@ -73,14 +91,19 @@ export default function MembershipUpgradePage() {
   async function handleSubscribe() {
     if (!selected) return;
     setStep("subscribing");
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) { setError("Session expired. Please refresh."); setStep("plans"); return; }
+
+    let token = autoToken;
+    if (!token) {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) { setError("Session expired. Please refresh."); setStep("plans"); return; }
+      token = session.access_token;
+    }
 
     const res = await fetch("/api/create-membership-checkout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${session.access_token}`,
+        "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify({ plan: selected }),
     });
