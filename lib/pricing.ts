@@ -52,6 +52,48 @@ export function getCanonicalPackage(credits: number, currency: string): CreditPa
   ) ?? null;
 }
 
+export type MembershipTier = "free" | "silver" | "gold" | "platinum";
+
+export type MembershipPlan = {
+  id: MembershipTier;
+  name: string;
+  amount: number;      // Stripe unit_amount (AED fils = ×100)
+  displayPrice: string;
+  features: string[];
+  popular?: boolean;
+};
+
+export const MEMBERSHIP_PLANS: MembershipPlan[] = [
+  {
+    id: "silver",
+    name: "Silver",
+    amount: 3900,
+    displayPrice: "AED 39",
+    features: ["5 experiences / day", "60 credits / month bonus", "4% platform fee", "Schedule up to tomorrow"],
+  },
+  {
+    id: "gold",
+    name: "Gold",
+    amount: 6900,
+    displayPrice: "AED 69",
+    features: ["10 experiences / day", "120 credits / month bonus", "3% platform fee", "Schedule up to 7 days", "Weekly repeat scheduling", "Gender & age filters"],
+    popular: true,
+  },
+  {
+    id: "platinum",
+    name: "Platinum",
+    amount: 9900,
+    displayPrice: "AED 99",
+    features: ["Unlimited experiences", "200 credits / month bonus", "1% platform fee", "Schedule up to 30 days", "All repeat options", "All preference filters", "Priority matching"],
+  },
+];
+
+export const TIER_ORDER: MembershipTier[] = ["free", "silver", "gold", "platinum"];
+
+export function getCanonicalMembershipPlan(planId: string): MembershipPlan | null {
+  return MEMBERSHIP_PLANS.find(p => p.id === planId) ?? null;
+}
+
 export function formatPrice(pkg: CreditPackage): string {
   if (pkg.symbolAfter) return `${pkg.price} ${pkg.symbol.trim()}`;
   return `${pkg.symbol}${pkg.price}`;

@@ -1,26 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+
+const TIER_LABELS: Record<string, string> = {
+  silver: "Silver",
+  gold: "Gold",
+  platinum: "Platinum",
+};
 
 function SuccessContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const [state, setState] = useState<"loading" | "done" | "error">("loading");
-  const [credits, setCredits] = useState<number | null>(null);
+  const [membership, setMembership] = useState<string | null>(null);
 
   useEffect(() => {
     if (!sessionId) { setState("error"); return; }
 
-    fetch("/api/fulfill", {
+    fetch("/api/fulfill-membership", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ session_id: sessionId }),
     })
       .then(r => r.json())
       .then(data => {
-        if (data.ok) { setCredits(data.credits); setState("done"); }
+        if (data.ok) { setMembership(data.membership); setState("done"); }
         else setState("error");
       })
       .catch(() => setState("error"));
@@ -28,12 +33,12 @@ function SuccessContent() {
 
   return (
     <div className="min-h-screen bg-[#1A1210] flex flex-col items-center justify-center px-6 text-center">
-      <span className="font-serif italic text-2xl text-[#FAF8F5] mb-16">friendly</span>
+      <a href="/" className="font-serif italic text-2xl text-[#FAF8F5] mb-16">friendly</a>
 
       {state === "loading" && (
         <div className="flex flex-col items-center gap-4">
           <div className="w-8 h-8 border-2 border-[#C1714A] border-t-transparent rounded-full animate-spin" />
-          <p className="text-[rgba(250,248,245,0.4)] text-sm">Adding credits to your account…</p>
+          <p className="text-[rgba(250,248,245,0.4)] text-sm">Activating your membership…</p>
         </div>
       )}
 
@@ -44,10 +49,10 @@ function SuccessContent() {
           </div>
           <div>
             <h1 className="font-serif text-3xl text-[#FAF8F5] mb-3">
-              {credits} credits added
+              {TIER_LABELS[membership ?? ""] ?? "Membership"} activated
             </h1>
             <p className="text-[rgba(250,248,245,0.4)] text-base leading-relaxed">
-              Open the Friendly app and pull down on the home screen to refresh your balance.
+              Your plan is now active. Open the Friendly app and pull down on the home screen to see your updated tier.
             </p>
           </div>
           <a
@@ -67,12 +72,12 @@ function SuccessContent() {
           <div>
             <h1 className="font-serif text-3xl text-[#FAF8F5] mb-3">Something went wrong</h1>
             <p className="text-[rgba(250,248,245,0.4)] text-base leading-relaxed">
-              Your payment may have gone through but credits weren't added.
+              Your payment may have gone through but the plan wasn&apos;t activated.
               Email us at{" "}
               <a href="mailto:hello@itsjustafriendly.com" className="text-[#C1714A] hover:opacity-80">
                 hello@itsjustafriendly.com
               </a>{" "}
-              and we'll sort it out.
+              and we&apos;ll sort it out.
             </p>
           </div>
         </div>
@@ -81,7 +86,7 @@ function SuccessContent() {
   );
 }
 
-export default function SuccessPage() {
+export default function MembershipSuccessPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-[#1A1210] flex items-center justify-center">

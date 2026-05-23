@@ -1,42 +1,40 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { supabase } from "../../lib/supabase";
-import { getCreditPackages, formatPrice, type CreditPackage } from "../../lib/pricing";
+import { supabase } from "../../../lib/supabase";
+import { MEMBERSHIP_PLANS, TIER_ORDER, type MembershipTier } from "../../../lib/pricing";
 
-type Step = "loading" | "phone" | "otp" | "packages" | "purchasing";
+type Step = "loading" | "phone" | "otp" | "plans" | "subscribing";
 
-export default function CreditsPage() {
+export default function MembershipUpgradePage() {
   const [step, setStep] = useState<Step>("loading");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
-  const [selected, setSelected] = useState<number | null>(null);
-  const [credits, setCredits] = useState<number | null>(null);
+  const [selected, setSelected] = useState<MembershipTier | null>(null);
+  const [currentTier, setCurrentTier] = useState<MembershipTier>("free");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resent, setResent] = useState(false);
 
-  const packages = getCreditPackages("AE");
-
-  const fetchCredits = useCallback(async (userId: string) => {
+  const fetchTier = useCallback(async (userId: string) => {
     const { data } = await supabase
       .from("users")
-      .select("credits")
+      .select("host_membership")
       .eq("id", userId)
       .single();
-    if (data) setCredits(data.credits as number);
+    if (data) setCurrentTier((data.host_membership || "free") as MembershipTier);
   }, []);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (data.session?.user) {
-        fetchCredits(data.session.user.id);
-        setStep("packages");
+        fetchTier(data.session.user.id);
+        setStep("plans");
       } else {
         setStep("phone");
       }
     });
-  }, [fetchCredits]);
+  }, [fetchTier]);
 
   async function sendOtp() {
     if (!phone.trim()) return;
@@ -63,51 +61,44 @@ export default function CreditsPage() {
     setBusy(true);
     setError(null);
     const fullPhone = phone.startsWith("+") ? phone : `+${phone}`;
-    const { data, error } = await supabase.auth.verifyOtp({
-      phone: fullPhone,
-      token: otp,
-      type: "sms",
-    });
+    const { data, error } = await supabase.auth.verifyOtp({ phone: fullPhone, token: otp, type: "sms" });
     setBusy(false);
     if (error) { setError("Incorrect code. Try again."); return; }
     if (data.user) {
-      fetchCredits(data.user.id);
-      setStep("packages");
+      fetchTier(data.user.id);
+      setStep("plans");
     }
   }
 
-  async function handlePurchase() {
+  async function handleSubscribe() {
     if (!selected) return;
-    const pkg = packages.find(p => p.credits === selected);
-    if (!pkg) return;
-
-    setStep("purchasing");
+    setStep("subscribing");
     const { data: { session } } = await supabase.auth.getSession();
-    if (!session) { setError("Session expired. Please refresh."); setStep("packages"); return; }
+    if (!session) { setError("Session expired. Please refresh."); setStep("plans"); return; }
 
-    const res = await fetch("/api/create-checkout", {
+    const res = await fetch("/api/create-membership-checkout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${session.access_token}`,
       },
-      // price omitted — server looks it up from canonical pricing table
-      body: JSON.stringify({
-        credits: pkg.credits,
-        currency: pkg.currency,
-      }),
+      body: JSON.stringify({ plan: selected }),
     });
 
-    if (!res.ok) { setError("Something went wrong. Please try again."); setStep("packages"); return; }
+    if (!res.ok) { setError("Something went wrong. Please try again."); setStep("plans"); return; }
     const { url } = await res.json();
     window.location.href = url;
   }
 
   if (step === "loading") {
-    return <Screen><div className="text-[rgba(250,248,245,0.3)] text-sm">Loading…</div></Screen>;
+    return (
+      <Screen>
+        <div className="w-8 h-8 border-2 border-[#C1714A] border-t-transparent rounded-full animate-spin" />
+      </Screen>
+    );
   }
 
-  if (step === "purchasing") {
+  if (step === "subscribing") {
     return (
       <Screen>
         <div className="flex flex-col items-center gap-4">
@@ -121,10 +112,10 @@ export default function CreditsPage() {
   return (
     <div className="min-h-screen bg-[#1A1210] flex flex-col">
       <nav className="flex items-center justify-between px-6 py-5 max-w-lg mx-auto w-full">
-        <span className="font-serif italic text-xl text-[#FAF8F5]">friendly</span>
-        {step === "packages" && (
+        <a href="/" className="font-serif italic text-xl text-[#FAF8F5]">friendly</a>
+        {step === "plans" && (
           <button
-            onClick={async () => { await supabase.auth.signOut(); setStep("phone"); setCredits(null); }}
+            onClick={async () => { await supabase.auth.signOut(); setStep("phone"); setCurrentTier("free"); }}
             className="text-xs text-[rgba(250,248,245,0.3)] hover:text-[rgba(250,248,245,0.6)] transition-colors"
           >
             Sign out
@@ -139,12 +130,11 @@ export default function CreditsPage() {
           {step === "phone" && (
             <div className="flex flex-col gap-6">
               <div>
-                <h1 className="font-serif text-3xl text-[#FAF8F5] mb-2">Get credits</h1>
+                <h1 className="font-serif text-3xl text-[#FAF8F5] mb-2">Upgrade plan</h1>
                 <p className="text-[rgba(250,248,245,0.4)] text-sm leading-relaxed">
-                  Sign in with your phone number to load credits into your account.
+                  Sign in with your phone number to upgrade your membership.
                 </p>
               </div>
-
               <div className="flex flex-col gap-3">
                 <label className="text-xs text-[rgba(250,248,245,0.4)] font-semibold uppercase tracking-widest">
                   Phone number
@@ -161,9 +151,7 @@ export default function CreditsPage() {
                 />
                 <p className="text-[rgba(250,248,245,0.25)] text-xs">Include country code — e.g. +971 for UAE, +44 for UK</p>
               </div>
-
               {error && <p className="text-red-400 text-sm">{error}</p>}
-
               <button
                 onClick={sendOtp}
                 disabled={busy || !phone.trim()}
@@ -185,27 +173,20 @@ export default function CreditsPage() {
                   ← Back
                 </button>
                 <h1 className="font-serif text-3xl text-[#FAF8F5] mb-2">Enter code</h1>
-                <p className="text-[rgba(250,248,245,0.4)] text-sm">
-                  Code sent to {phone}
-                </p>
+                <p className="text-[rgba(250,248,245,0.4)] text-sm">Code sent to {phone}</p>
               </div>
-
-              <div className="flex flex-col gap-3">
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  placeholder="000000"
-                  maxLength={6}
-                  value={otp}
-                  onChange={e => { setOtp(e.target.value.replace(/\D/g, "")); setError(null); }}
-                  onKeyDown={e => e.key === "Enter" && verifyOtp()}
-                  className="w-full bg-[rgba(250,248,245,0.05)] border border-[rgba(250,248,245,0.1)] rounded-2xl px-4 py-4 text-[#FAF8F5] text-2xl text-center tracking-[0.5em] placeholder:tracking-normal placeholder:text-[rgba(250,248,245,0.2)] focus:outline-none focus:border-[rgba(193,113,74,0.5)] transition-colors"
-                  autoFocus
-                />
-              </div>
-
+              <input
+                type="text"
+                inputMode="numeric"
+                placeholder="000000"
+                maxLength={6}
+                value={otp}
+                onChange={e => { setOtp(e.target.value.replace(/\D/g, "")); setError(null); }}
+                onKeyDown={e => e.key === "Enter" && verifyOtp()}
+                className="w-full bg-[rgba(250,248,245,0.05)] border border-[rgba(250,248,245,0.1)] rounded-2xl px-4 py-4 text-[#FAF8F5] text-2xl text-center tracking-[0.5em] placeholder:tracking-normal placeholder:text-[rgba(250,248,245,0.2)] focus:outline-none focus:border-[rgba(193,113,74,0.5)] transition-colors"
+                autoFocus
+              />
               {error && <p className="text-red-400 text-sm">{error}</p>}
-
               <button
                 onClick={verifyOtp}
                 disabled={busy || otp.length < 6}
@@ -213,7 +194,6 @@ export default function CreditsPage() {
               >
                 {busy ? "Verifying…" : "Verify →"}
               </button>
-
               <button
                 onClick={resendOtp}
                 disabled={busy}
@@ -224,47 +204,69 @@ export default function CreditsPage() {
             </div>
           )}
 
-          {/* PACKAGES */}
-          {step === "packages" && (
+          {/* PLANS */}
+          {step === "plans" && (
             <div className="flex flex-col gap-6">
               <div>
-                <h1 className="font-serif text-3xl text-[#FAF8F5] mb-1">Get credits</h1>
-                {credits !== null && (
-                  <p className="text-[rgba(250,248,245,0.4)] text-sm">
-                    Current balance: <span className="text-[#C1714A] font-semibold">{credits} credits</span>
-                  </p>
-                )}
+                <h1 className="font-serif text-3xl text-[#FAF8F5] mb-1">Upgrade plan</h1>
+                <p className="text-[rgba(250,248,245,0.4)] text-sm">
+                  Current:{" "}
+                  <span className="text-[#C1714A] font-semibold capitalize">{currentTier}</span>
+                </p>
               </div>
 
               <div className="flex flex-col gap-3">
-                {packages.map((pkg, i) => {
-                  const isSelected = selected === pkg.credits;
-                  const isPopular = i === 1;
+                {MEMBERSHIP_PLANS.map(plan => {
+                  const isCurrent = plan.id === currentTier;
+                  const isDowngrade = TIER_ORDER.indexOf(plan.id) <= TIER_ORDER.indexOf(currentTier);
+                  const isSelected = selected === plan.id;
+
                   return (
                     <button
-                      key={pkg.credits}
-                      onClick={() => setSelected(pkg.credits)}
+                      key={plan.id}
+                      onClick={() => !isDowngrade && setSelected(plan.id)}
+                      disabled={isDowngrade}
                       className={`relative w-full text-left rounded-2xl border px-5 py-4 transition-all ${
-                        isSelected
-                          ? "border-[#C1714A] bg-[rgba(193,113,74,0.08)]"
-                          : "border-[rgba(250,248,245,0.08)] bg-[rgba(250,248,245,0.03)] hover:border-[rgba(250,248,245,0.15)]"
+                        isCurrent
+                          ? "border-[rgba(250,248,245,0.15)] bg-[rgba(250,248,245,0.04)] opacity-60 cursor-default"
+                          : isSelected
+                            ? "border-[#C1714A] bg-[rgba(193,113,74,0.08)]"
+                            : isDowngrade
+                              ? "border-[rgba(250,248,245,0.05)] bg-[rgba(250,248,245,0.02)] opacity-40 cursor-not-allowed"
+                              : "border-[rgba(250,248,245,0.08)] bg-[rgba(250,248,245,0.03)] hover:border-[rgba(250,248,245,0.15)]"
                       }`}
                     >
-                      {isPopular && (
+                      {plan.popular && !isCurrent && (
                         <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-semibold bg-[#C1714A] text-white px-2.5 py-1 rounded-full whitespace-nowrap">
-                          Popular
+                          Most popular
                         </span>
                       )}
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className={`font-semibold text-lg ${isSelected ? "text-[#C1714A]" : "text-[#FAF8F5]"}`}>
-                            {pkg.credits} credits
-                          </p>
-                        </div>
-                        <p className={`font-semibold text-xl ${isSelected ? "text-[#C1714A]" : "text-[rgba(250,248,245,0.5)]"}`}>
-                          {formatPrice(pkg)}
+                      {isCurrent && (
+                        <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-semibold bg-[rgba(250,248,245,0.15)] text-[rgba(250,248,245,0.6)] px-2.5 py-1 rounded-full whitespace-nowrap">
+                          Current plan
+                        </span>
+                      )}
+
+                      <div className="flex items-start justify-between mb-3">
+                        <p className={`font-semibold text-lg ${isSelected ? "text-[#C1714A]" : "text-[#FAF8F5]"}`}>
+                          {plan.name}
                         </p>
+                        <div className="text-right">
+                          <p className={`font-semibold text-xl ${isSelected ? "text-[#C1714A]" : "text-[rgba(250,248,245,0.5)]"}`}>
+                            {plan.displayPrice}
+                          </p>
+                          <p className="text-[rgba(250,248,245,0.25)] text-xs">/ month</p>
+                        </div>
                       </div>
+
+                      <ul className="flex flex-col gap-1">
+                        {plan.features.map(f => (
+                          <li key={f} className="flex items-center gap-2 text-xs text-[rgba(250,248,245,0.5)]">
+                            <span className={`shrink-0 ${isSelected ? "text-[#C1714A]" : "text-[rgba(250,248,245,0.3)]"}`}>✓</span>
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
                     </button>
                   );
                 })}
@@ -273,21 +275,21 @@ export default function CreditsPage() {
               {error && <p className="text-red-400 text-sm">{error}</p>}
 
               <button
-                onClick={handlePurchase}
+                onClick={handleSubscribe}
                 disabled={!selected}
                 className="w-full bg-[#C1714A] text-[#FAF8F5] py-4 rounded-full font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {selected
                   ? (() => {
-                      const p = packages.find(pkg => pkg.credits === selected)!;
-                      return `Buy ${selected} credits · ${formatPrice(p)} →`;
+                      const p = MEMBERSHIP_PLANS.find(p => p.id === selected)!;
+                      return `Subscribe to ${p.name} · ${p.displayPrice}/mo →`;
                     })()
-                  : "Select a package"}
+                  : "Select a plan"}
               </button>
 
               <p className="text-center text-[rgba(250,248,245,0.2)] text-xs">
-                Credits appear in the app instantly after payment.<br />
-                Pull down to refresh your balance.
+                Billed monthly · Cancel anytime by emailing<br />
+                <a href="mailto:hello@itsjustafriendly.com" className="underline">hello@itsjustafriendly.com</a>
               </p>
             </div>
           )}
