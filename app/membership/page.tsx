@@ -145,12 +145,11 @@ export default function MembershipPage() {
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-5 max-w-5xl mx-auto w-full">
         <a href="/" className="font-serif italic text-xl text-[#FAF8F5]">friendly</a>
-        <a
-          href="mailto:hello@itsjustafriendly.com?subject=Membership question"
-          className="text-sm text-[rgba(250,248,245,0.4)] hover:text-[rgba(250,248,245,0.7)] transition-colors"
-        >
-          Contact us
-        </a>
+        <div className="flex items-center gap-4">
+          <a href="/about" className="text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors">About</a>
+          <a href="/credits" className="text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors">Get credits</a>
+          <a href="/#download" className="text-sm font-semibold text-[#FAF8F5] border border-[rgba(250,248,245,0.2)] px-4 py-2 rounded-full hover:border-[rgba(250,248,245,0.5)] transition-colors">Download</a>
+        </div>
       </nav>
 
       <div className="px-6 max-w-5xl mx-auto w-full pb-32">

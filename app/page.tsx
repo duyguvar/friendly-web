@@ -7,6 +7,12 @@ export default function Home() {
         <span className="font-serif italic text-2xl text-[#FAF8F5] tracking-tight">friendly</span>
         <div className="flex items-center gap-4">
           <a
+            href="/about"
+            className="text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors"
+          >
+            About
+          </a>
+          <a
             href="/membership"
             className="text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors"
           >

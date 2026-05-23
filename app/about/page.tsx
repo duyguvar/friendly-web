@@ -6,6 +6,7 @@ export default function AboutPage() {
       <nav className="flex items-center justify-between px-6 py-5 max-w-4xl mx-auto w-full">
         <a href="/" className="font-serif italic text-xl text-[#FAF8F5]">friendly</a>
         <div className="flex items-center gap-4">
+          <a href="/about" className="text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors">About</a>
           <a href="/membership" className="text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors">Pricing</a>
           <a href="/credits" className="text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors">Get credits</a>
           <a href="/#download" className="text-sm font-semibold text-[#FAF8F5] border border-[rgba(250,248,245,0.2)] px-4 py-2 rounded-full hover:border-[rgba(250,248,245,0.5)] transition-colors">Download</a>
@@ -62,7 +63,7 @@ export default function AboutPage() {
               <div>
                 <p className="text-[#FAF8F5] font-semibold mb-2">One thing happens here.</p>
                 <p className="text-[rgba(250,248,245,0.4)] text-base leading-relaxed">
-                  Someone opens a coffee, a run, a walk. A real time, a real place. Someone nearby joins. They show up. They meet. That's it.
+                  Someone starts a moment worth sharing — a coffee, a run, a walk. A real time, a real place. Someone nearby joins. They show up. They meet. That's it.
                 </p>
               </div>
               <div>
@@ -74,7 +75,7 @@ export default function AboutPage() {
               <div>
                 <p className="text-[#FAF8F5] font-semibold mb-2">Credits, not currency.</p>
                 <p className="text-[rgba(250,248,245,0.4)] text-base leading-relaxed">
-                  Hosts earn. Guests give. The value circulates between people — not extracted by a platform.
+                  Hosts design the moment. Guests make it real. Credits flow between them — a quiet acknowledgment that someone's time and care mattered.
                 </p>
               </div>
             </div>
