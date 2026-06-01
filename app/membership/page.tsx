@@ -303,6 +303,7 @@ export default function MembershipPage() {
           <span className="font-serif italic text-lg">friendly</span>
           <div className="flex items-center gap-5">
             <a href="/privacy" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">Privacy</a>
+            <a href="/terms" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">Terms</a>
             <a href="mailto:hello@itsjustafriendly.com" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">hello@itsjustafriendly.com</a>
           </div>
           <span className="text-xs">© 2026 Friendly · Dubai</span>
