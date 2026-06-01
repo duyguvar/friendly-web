@@ -166,6 +166,7 @@ export default function Home() {
             <a href="/about" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">About</a>
             <a href="/membership" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">Pricing</a>
             <a href="/credits" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">Get credits</a>
+            <a href="/privacy" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">Privacy</a>
             <a href="mailto:hello@itsjustafriendly.com" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">hello@itsjustafriendly.com</a>
           </div>
           <span className="text-xs">© 2026 Friendly · Dubai</span>

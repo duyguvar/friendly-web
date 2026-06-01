@@ -301,9 +301,10 @@ export default function MembershipPage() {
       <footer className="border-t border-[rgba(250,248,245,0.06)] py-8 px-6 mt-auto">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[rgba(250,248,245,0.25)] text-sm">
           <span className="font-serif italic text-lg">friendly</span>
-          <a href="mailto:hello@itsjustafriendly.com" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">
-            hello@itsjustafriendly.com
-          </a>
+          <div className="flex items-center gap-5">
+            <a href="/privacy" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">Privacy</a>
+            <a href="mailto:hello@itsjustafriendly.com" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">hello@itsjustafriendly.com</a>
+          </div>
           <span className="text-xs">© 2026 Friendly · Dubai</span>
         </div>
       </footer>
