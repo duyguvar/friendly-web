@@ -4,7 +4,7 @@ export default function TermsOfService() {
 
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-5 max-w-4xl mx-auto w-full">
-        <a href="/" className="font-serif italic text-xl text-[#FAF8F5]">friendly</a>
+        <a href="/" className="flex items-center gap-2"><svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="13" cy="13" r="6" fill="#C1714A"/><circle cx="20" cy="20" r="6" fill="#C1714A" opacity="0.45"/></svg><span className="font-serif italic text-xl text-[#FAF8F5]">friendly</span></a>
         <div className="flex items-center gap-4">
           <a href="/about" className="hidden sm:block text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors">About</a>
           <a href="/membership" className="hidden sm:block text-sm text-[rgba(250,248,245,0.5)] hover:text-[rgba(250,248,245,0.85)] transition-colors">Pricing</a>

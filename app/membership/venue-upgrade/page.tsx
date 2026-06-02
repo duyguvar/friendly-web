@@ -157,7 +157,7 @@ export default function VenueMembershipUpgradePage() {
   return (
     <div className="min-h-screen bg-[#1A1210] flex flex-col">
       <nav className="flex items-center justify-between px-6 py-5 max-w-lg mx-auto w-full">
-        <a href="/" className="font-serif italic text-xl text-[#FAF8F5]">friendly</a>
+        <a href="/" className="flex items-center gap-2"><svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="13" cy="13" r="6" fill="#C1714A"/><circle cx="20" cy="20" r="6" fill="#C1714A" opacity="0.45"/></svg><span className="font-serif italic text-xl text-[#FAF8F5]">friendly</span></a>
         {(step === "venues" || step === "plans") && (
           <button
             onClick={async () => { await supabase.auth.signOut(); setStep("phone"); setVenues([]); setSelectedVenue(null); }}

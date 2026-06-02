@@ -28,7 +28,7 @@ function SuccessContent() {
 
   return (
     <div className="min-h-screen bg-[#1A1210] flex flex-col items-center justify-center px-6 text-center">
-      <span className="font-serif italic text-2xl text-[#FAF8F5] mb-16">friendly</span>
+      <span className="flex items-center gap-2 mb-16"><svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="13" cy="13" r="6" fill="#C1714A"/><circle cx="20" cy="20" r="6" fill="#C1714A" opacity="0.45"/></svg><span className="font-serif italic text-2xl text-[#FAF8F5]">friendly</span></span>
 
       {state === "loading" && (
         <div className="flex flex-col items-center gap-4">
