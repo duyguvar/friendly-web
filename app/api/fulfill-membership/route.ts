@@ -24,7 +24,11 @@ export async function POST(req: Request) {
     const admin = createAdminClient();
     const { error } = await admin
       .from("users")
-      .update({ host_membership: membership })
+      .update({
+        host_membership: membership,
+        stripe_customer_id: typeof sub.customer === "string" ? sub.customer : sub.customer?.id ?? null,
+        stripe_subscription_id: sub.id,
+      })
       .eq("id", userId);
 
     if (error) {
