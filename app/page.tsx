@@ -170,7 +170,10 @@ export default function Home() {
             <a href="/terms" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">Terms</a>
             <a href="mailto:hello@itsjustafriendly.com" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">hello@itsjustafriendly.com</a>
           </div>
-          <span className="text-xs">© 2026 Friendly · Dubai</span>
+          <div className="flex items-center gap-2">
+            <img src="/xdlabs-logo.png" alt="XDLabs Future" style={{height: '28px', width: 'auto', mixBlendMode: 'screen', opacity: 0.7}} />
+            <span className="text-xs">© 2026 XDLabs Future FZCO · Dubai</span>
+          </div>
         </div>
       </footer>
 

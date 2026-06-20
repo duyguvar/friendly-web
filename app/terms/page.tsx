@@ -226,7 +226,7 @@ export default function TermsOfService() {
             <p className="text-[#C1714A] text-xs font-semibold tracking-[0.2em] uppercase mb-4">10</p>
             <h2 className="font-serif text-2xl text-[#FAF8F5] mb-5">Governing law</h2>
             <p className="text-[rgba(250,248,245,0.4)] leading-relaxed">
-              These terms are governed by the laws of the United Arab Emirates. Any disputes will be resolved in the courts of Dubai, UAE.
+              These terms are governed by the laws of the United Arab Emirates. Any disputes will be resolved in the courts of Dubai, UAE. Friendly is operated by XDLabs Future FZCO, a free zone company registered in Dubai, UAE (IFZA).
             </p>
           </section>
 
@@ -269,7 +269,10 @@ export default function TermsOfService() {
             <a href="/terms" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">Terms</a>
             <a href="mailto:hello@itsjustafriendly.com" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">hello@itsjustafriendly.com</a>
           </div>
-          <span className="text-xs">© 2026 Friendly · Dubai</span>
+          <div className="flex items-center gap-2">
+            <img src="/xdlabs-logo.png" alt="XDLabs Future" style={{height: '28px', width: 'auto', mixBlendMode: 'screen', opacity: 0.7}} />
+            <span className="text-xs">© 2026 XDLabs Future FZCO · Dubai</span>
+          </div>
         </div>
       </footer>
 

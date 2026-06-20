@@ -38,7 +38,7 @@ export default function PrivacyPolicy() {
             <p className="text-[#C1714A] text-xs font-semibold tracking-[0.2em] uppercase mb-4">01</p>
             <h2 className="font-serif text-2xl text-[#FAF8F5] mb-5">Who we are</h2>
             <p className="text-[rgba(250,248,245,0.4)] leading-relaxed">
-              Friendly is a counter-loneliness platform that helps people open and join real-world experiences — coffee, walks, runs, lunch. We are based in Dubai, UAE. Questions? Reach us at{" "}
+              Friendly is a counter-loneliness platform that helps people open and join real-world experiences — coffee, walks, runs, lunch. Friendly is operated by XDLabs Future FZCO, a free zone company registered in Dubai, UAE (IFZA). Questions? Reach us at{" "}
               <a href="mailto:hello@itsjustafriendly.com" className="text-[#C1714A] hover:opacity-80 transition-opacity">
                 hello@itsjustafriendly.com
               </a>
@@ -230,7 +230,10 @@ export default function PrivacyPolicy() {
             <a href="/terms" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">Terms</a>
             <a href="mailto:hello@itsjustafriendly.com" className="hover:text-[rgba(250,248,245,0.5)] transition-colors">hello@itsjustafriendly.com</a>
           </div>
-          <span className="text-xs">© 2026 Friendly · Dubai</span>
+          <div className="flex items-center gap-2">
+            <img src="/xdlabs-logo.png" alt="XDLabs Future" style={{height: '28px', width: 'auto', mixBlendMode: 'screen', opacity: 0.7}} />
+            <span className="text-xs">© 2026 XDLabs Future FZCO · Dubai</span>
+          </div>
         </div>
       </footer>
 
